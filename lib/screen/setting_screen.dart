@@ -193,11 +193,13 @@ class _SettingScreenState extends State<SettingScreen> {
                                   title: Text(
                                     'Konfirmasi Logout',
                                     style: AppConstants.subtitleStyle.copyWith(
+                                      color: AppConstants.accentColor,
                                     ),
                                   ),
                                   content: Text(
                                     'Apakah Anda yakin ingin logout?',
                                     style: AppConstants.bodyStyle.copyWith(
+                                      color: AppConstants.accentColor,
                                     ),
                                   ),
                                   actions: [
@@ -258,15 +260,31 @@ class _SettingScreenState extends State<SettingScreen> {
   }) {
     return Column(
       children: [
-        Card(
-          margin: EdgeInsets.zero,
-          elevation: 1,
-          child: Image.asset(
-            imageAssetPath,
-            width: 185,
-            height: 120,
-            fit: BoxFit.cover,
-          ),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Card(
+              margin: EdgeInsets.zero,
+              elevation: 1,
+              child: Image.asset(
+                imageAssetPath,
+                width: 185,
+                height: 120,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              child: CircleAvatar(
+                backgroundColor: AppConstants.primaryColor,
+                radius: 20,
+                child: IconButton(
+                  icon: const Icon(Icons.edit, color: Colors.white),
+                  onPressed: () {
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
         Container(
           width: 185,
