@@ -32,7 +32,6 @@ class _SettingScreenState extends State<SettingScreen> {
         body: Column(
           children: [
             const HeaderWidget(subtitle: 'Pengaturan'),
-
             Container(
               color: AppConstants.backgroundColor,
               padding: const EdgeInsets.all(8),
@@ -44,29 +43,27 @@ class _SettingScreenState extends State<SettingScreen> {
                       children: [
                         Text(
                           'Nama Event',
-                          style: const TextStyle(
+                          style: AppConstants.bodyStyle.copyWith(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey,
+                            color: AppConstants.neutralColor,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Ina Amalia & Alfi Firdaus',
-                          style: const TextStyle(fontSize: 16),
+                          style: AppConstants.bodyStyle,
                         ),
                       ],
                     ),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.edit, color: Colors.grey),
+                    icon: Icon(Icons.edit, color: AppConstants.neutralColor),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 8),
-
             Container(
               color: AppConstants.backgroundColor,
               padding: const EdgeInsets.all(8),
@@ -78,28 +75,26 @@ class _SettingScreenState extends State<SettingScreen> {
                       children: [
                         Text(
                           'Pesan Undangan',
-                          style: const TextStyle(
+                          style: AppConstants.bodyStyle.copyWith(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey,
+                            color: AppConstants.neutralColor,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           '*Kepada Yth : ...',
-                          style: const TextStyle(fontSize: 16),
+                          style: AppConstants.bodyStyle,
                         ),
                       ],
                     ),
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.edit, color: Colors.grey),
+                    icon: Icon(Icons.edit, color: AppConstants.neutralColor),
                   ),
                 ],
               ),
             ),
-
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -124,7 +119,6 @@ class _SettingScreenState extends State<SettingScreen> {
                       ),
                     ),
                     const SizedBox(height: 8),
-
                     Container(
                       color: AppConstants.backgroundColor,
                       padding: const EdgeInsets.all(8),
@@ -136,42 +130,36 @@ class _SettingScreenState extends State<SettingScreen> {
                               children: [
                                 Text(
                                   'Akses untuk Layar Sapa',
-                                  style: const TextStyle(
+                                  style: AppConstants.bodyStyle.copyWith(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.grey,
+                                    color: AppConstants.neutralColor,
                                   ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   'Tap Untuk Menyalin Link Layar Sapa',
-                                  style: const TextStyle(fontSize: 16),
+                                  style: AppConstants.bodyStyle,
                                 ),
                               ],
                             ),
                           ),
                           IconButton(
                             onPressed: () {
-                              Clipboard.setData(
-                                const ClipboardData(
-                                  text: 'https://example.com',
-                                ),
-                              ).then((_) {
+                              Clipboard.setData(const ClipboardData(text: 'https://example.com')).then((_) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Link telah disalin'),
-                                    duration: Duration(seconds: 1),
+                                  SnackBar(
+                                    content: Text('Link telah disalin', style: AppConstants.bodyStyle),
+                                    duration: const Duration(seconds: 1),
                                   ),
                                 );
                               });
                             },
-                            icon: const Icon(Icons.copy, color: Colors.grey),
+                            icon: Icon(Icons.copy, color: AppConstants.neutralColor),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 8),
-
                     Container(
                       color: AppConstants.backgroundColor,
                       padding: const EdgeInsets.all(8),
@@ -183,16 +171,15 @@ class _SettingScreenState extends State<SettingScreen> {
                               children: [
                                 Text(
                                   'Logout',
-                                  style: const TextStyle(
+                                  style: AppConstants.bodyStyle.copyWith(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.grey,
+                                    color: AppConstants.neutralColor,
                                   ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                   'Keluar Dari Akun Ini',
-                                  style: const TextStyle(fontSize: 16),
+                                  style: AppConstants.bodyStyle,
                                 ),
                               ],
                             ),
@@ -201,69 +188,52 @@ class _SettingScreenState extends State<SettingScreen> {
                             onPressed: () {
                               showDialog(
                                 context: context,
-                                builder:
-                                    (context) => AlertDialog(
-                                      backgroundColor:
-                                          AppConstants.backgroundColor,
-                                      title: Text(
-                                        'Konfirmasi Logout',
-                                        style: TextStyle(
-                                          color: AppConstants.accentColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                      ),
-                                      content: Text(
-                                        'Apakah Anda yakin ingin logout?',
-                                        style: TextStyle(
-                                          color: AppConstants.accentColor,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      actions: [
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                AppConstants.backgroundColor,
-                                            foregroundColor:
-                                                AppConstants.neutralColor,
-                                            side: BorderSide(
-                                              color: AppConstants.primaryColor,
-                                            ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: const Text('Tidak'),
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor:
-                                                AppConstants.warningColor,
-                                            foregroundColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            Navigator.pushReplacementNamed(
-                                              context,
-                                              '/logout',
-                                            );
-                                          },
-                                          child: const Text('Ya'),
-                                        ),
-                                      ],
+                                builder: (context) => AlertDialog(
+                                  backgroundColor: AppConstants.backgroundColor,
+                                  title: Text(
+                                    'Konfirmasi Logout',
+                                    style: AppConstants.subtitleStyle.copyWith(
                                     ),
+                                  ),
+                                  content: Text(
+                                    'Apakah Anda yakin ingin logout?',
+                                    style: AppConstants.bodyStyle.copyWith(
+                                    ),
+                                  ),
+                                  actions: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppConstants.backgroundColor,
+                                        foregroundColor: AppConstants.neutralColor,
+                                        side: BorderSide(color: AppConstants.primaryColor),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(AppConstants.borderRadius),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Tidak', style: AppConstants.bodyStyle),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppConstants.warningColor,
+                                        foregroundColor: AppConstants.backgroundColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(AppConstants.borderRadius),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        Navigator.pushReplacementNamed(context, '/login');
+                                      },
+                                      child: Text('Ya', style: AppConstants.bodyStyle),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
-                            icon: const Icon(Icons.logout, color: Colors.grey),
+                            icon: Icon(Icons.logout, color: AppConstants.neutralColor),
                           ),
                         ],
                       ),
@@ -299,21 +269,22 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
         ),
         Container(
-          width: 185, // Same width as the image
+          width: 185,
           padding: const EdgeInsets.symmetric(vertical: 4),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             color: AppConstants.primaryColor,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(8),
               bottomRight: Radius.circular(8),
-              topLeft: Radius.zero,
-              topRight: Radius.zero,
             ),
           ),
           child: Center(
             child: Text(
               label,
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+              style: AppConstants.bodyStyle.copyWith(
+                color: AppConstants.backgroundColor,
+                fontSize: 12,
+              ),
             ),
           ),
         ),

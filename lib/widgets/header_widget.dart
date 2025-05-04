@@ -35,19 +35,11 @@ class HeaderWidget extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: 'Last',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: AppConstants.headerFontSize,
-                          fontWeight: FontWeight.normal,
-                        ),
+                        style: AppConstants.headerStyle,
                       ),
                       TextSpan(
                         text: 'invitation',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: AppConstants.headerFontSize,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppConstants.headerBoldStyle,
                       ),
                     ],
                   ),
@@ -55,11 +47,11 @@ class HeaderWidget extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 38), // Align with logo
+              padding: const EdgeInsets.only(left: 38),
               child: Text(
                 subtitle,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: AppConstants.bodyStyle.copyWith(
+                  color: AppConstants.backgroundColor,
                   fontSize: 14,
                 ),
               ),

@@ -26,32 +26,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final now = DateTime.now();
     setState(() {
       _guests.addAll([
-        Guest(
-          id: '1',
-          name: 'Moch Nizwar Syafuan',
-          checkInDate: now,
-          isCheckedIn: true,
-          isVip: true,
-        ),
-        Guest(
-          id: '2',
-          name: 'Alfi Firdaus',
-          checkInDate: now,
-          isCheckedIn: true,
-        ),
-        Guest(
-          id: '3',
-          name: 'Moch Nizwar Syafuan',
-          checkInDate: now,
-          isCheckedIn: true,
-          isVip: true,
-        ),
-        Guest(
-          id: '4',
-          name: 'Alfi Firdaus',
-          checkInDate: now,
-          isCheckedIn: true,
-        ),
+        Guest(id: '1', name: 'Moch Nizwar Syafuan', checkInDate: now, isCheckedIn: true, isVip: true),
+        Guest(id: '2', name: 'Alfi Firdaus', checkInDate: now, isCheckedIn: true),
+        Guest(id: '3', name: 'Moch Nizwar Syafuan', checkInDate: now, isCheckedIn: true, isVip: true),
+        Guest(id: '4', name: 'Alfi Firdaus', checkInDate: now, isCheckedIn: true),
       ]);
     });
   }
@@ -60,15 +38,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
     try {
       await Future.delayed(const Duration(seconds: 1));
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Data berhasil diexport ke Excel'),
-          duration: Duration(seconds: 2),
+        SnackBar(
+          content: Text('Data berhasil diexport ke Excel', style: AppConstants.bodyStyle),
+          duration: const Duration(seconds: 2),
         ),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Gagal export: ${e.toString()}'),
+          content: Text('Gagal export: ${e.toString()}', style: AppConstants.bodyStyle),
           duration: const Duration(seconds: 2),
         ),
       );
@@ -78,55 +56,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true, // Allow pop on Dashboard to exit app
+      canPop: true,
       child: Scaffold(
+        backgroundColor: AppConstants.backgroundColor,
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              expandedHeight: 310,
-              floating: false,
-              pinned: true,
-              backgroundColor: Colors.white,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Stack(
-                  children: [
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: 255,
-                      child: Container(
-                        color: AppConstants.primaryColor,
-                      ),
-                    ),
-                    SafeArea(
-                      child: Padding(
+            SliverToBoxAdapter(
+              child: Stack(
+                children: [
+                  Container(
+                    height: 255,
+                    color: AppConstants.primaryColor,
+                  ),
+                  Column(
+                    children: [
+                      const HeaderWidget(subtitle: 'Dasbor'),
+                      Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: AppConstants.defaultPadding,
                           vertical: AppConstants.defaultPadding / 2,
                         ),
-                        child: Column(
-                          children: [
-                            const HeaderWidget(subtitle: 'Dasbor'),
-                            const SizedBox(height: 16),
-                            EventCard(
-                              username: 'alfifirdaus0607',
-                              eventName: 'Ina Amalia & Alfi Firdaus',
-                              eventDate: DateTime(2023, 6, 26),
-                              totalGuests: _guests.length,
-                              onExport: _handleExport,
-                            ),
-                          ],
+                        child: EventCard(
+                          username: 'alfifirdaus0607',
+                          eventName: 'Ina Amalia & Alfi Firdaus',
+                          eventDate: DateTime(2023, 6, 26),
+                          totalGuests: _guests.length,
+                          onExport: _handleExport,
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
             ),
             SliverToBoxAdapter(
               child: Container(
-                color: Colors.white,
+                color: AppConstants.backgroundColor,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: AppConstants.defaultPadding,
@@ -136,9 +101,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildExportSection(),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppConstants.defaultPadding),
                       _buildSearchField(),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: AppConstants.defaultPadding),
                       _buildGuestListHeader(),
                       const SizedBox(height: 8),
                       _buildGuestList(),
@@ -165,7 +130,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           onTap: _handleExport,
           child: Text(
             'Export to Excel',
-            style: TextStyle(
+            style: AppConstants.bodyStyle.copyWith(
               color: AppConstants.primaryColor,
               fontWeight: FontWeight.bold,
             ),
@@ -173,10 +138,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         Text(
           'TOTAL TAMU Check In: ${_guests.length}',
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -189,20 +151,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
         hintText: 'Cari tamu...',
         prefixIcon: const Icon(Icons.search),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppConstants.borderRadius),
         ),
         contentPadding: const EdgeInsets.symmetric(vertical: 12),
       ),
       onChanged: (value) {
-        // TODO: Implement search functionality
       },
     );
   }
 
   Widget _buildGuestListHeader() {
-    return const Text(
+    return Text(
       'Daftar Tamu',
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      style: AppConstants.subtitleStyle,
     );
   }
 
@@ -222,7 +183,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildGuestCard(Guest guest) {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.cardRadius)),
       child: ListTile(
         leading: SizedBox(
           width: 50,
@@ -234,19 +195,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 backgroundColor: AppConstants.primaryColor,
                 child: Text(
                   guest.initial,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: AppConstants.bodyStyle.copyWith(
+                    color: AppConstants.backgroundColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              if (guest.isVip)
-                Positioned(right: 4, bottom: 4, child: _buildVipBadge()),
+              if (guest.isVip) Positioned(right: 4, bottom: 4, child: _buildVipBadge()),
             ],
           ),
         ),
-        title: Text(guest.name),
-        subtitle: Text(guest.formattedCheckInDate),
+        title: Text(guest.name, style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.w600)),
+        subtitle: Text(guest.formattedCheckInDate, style: AppConstants.bodyStyle),
         trailing: _buildCheckInStatus(guest),
       ),
     );
@@ -255,31 +215,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget _buildVipBadge() {
     return Container(
       padding: const EdgeInsets.all(4),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: AppConstants.vipColor,
         shape: BoxShape.circle,
       ),
-      child: const Text(
+      child: Text(
         'VIP',
-        style: TextStyle(color: AppConstants.blackColor, fontSize: 10),
+        style: AppConstants.bodyStyle.copyWith(
+          color: AppConstants.blackColor,
+          fontSize: 10,
+        ),
       ),
     );
   }
 
   Widget _buildCheckInStatus(Guest guest) {
     if (!guest.isCheckedIn) {
-      return const Text('Pending', style: TextStyle(color: Colors.grey));
+      return Text(
+        'Pending',
+        style: AppConstants.bodyStyle.copyWith(color: AppConstants.neutralColor),
+      );
     }
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: AppConstants.primaryColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppConstants.borderRadius),
       ),
-      child: const Text(
+      child: Text(
         'Checked In',
-        style: TextStyle(color: Colors.white, fontSize: 12),
+        style: AppConstants.bodyStyle.copyWith(
+          color: AppConstants.backgroundColor,
+          fontSize: 12,
+        ),
       ),
     );
   }

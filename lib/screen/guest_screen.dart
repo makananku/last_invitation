@@ -18,7 +18,6 @@ class _GuestScreenState extends State<GuestScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, _) async {
         if (didPop) return;
-        // Navigate to DashboardScreen instead of popping
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -40,17 +39,14 @@ class _GuestScreenState extends State<GuestScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppConstants.backgroundColor,
                         border: Border.all(color: AppConstants.primaryColor),
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Tamu Mempelai Pria | 3',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      child: Text(
+                        'Tamu Mempelai Pria | 3',
+                        style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -62,14 +58,13 @@ class _GuestScreenState extends State<GuestScreen> {
                         color: AppConstants.primaryColor,
                         borderRadius: BorderRadius.circular(4),
                       ),
-                      child: const Center(
-                        child: Text(
-                          'Tamu Mempelai Wanita | 10',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      child: Text(
+                        'Tamu Mempelai Wanita | 10',
+                        style: AppConstants.bodyStyle.copyWith(
+                          color: AppConstants.backgroundColor,
+                          fontWeight: FontWeight.bold,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -86,12 +81,11 @@ class _GuestScreenState extends State<GuestScreen> {
                   hintText: 'Cari Tamu...',
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(AppConstants.borderRadius),
                   ),
                   contentPadding: const EdgeInsets.symmetric(vertical: 12),
                 ),
                 onChanged: (value) {
-                  // TODO: Implement search functionality
                 },
               ),
             ),
@@ -130,25 +124,24 @@ class _GuestScreenState extends State<GuestScreen> {
               child: Container(
                 decoration: BoxDecoration(
                   color: AppConstants.primaryColor,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(AppConstants.borderRadius),
                 ),
                 child: Row(
                   children: [
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          // TODO: Tambah Dari Kontak
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.contacts, color: Colors.white),
+                              Icon(Icons.contacts, color: AppConstants.backgroundColor),
                               const SizedBox(width: 8),
-                              const Text(
+                              Text(
                                 'Tambah Dari Kontak',
-                                style: TextStyle(color: Colors.white),
+                                style: AppConstants.bodyStyle.copyWith(color: AppConstants.backgroundColor),
                               ),
                             ],
                           ),
@@ -158,24 +151,23 @@ class _GuestScreenState extends State<GuestScreen> {
                     Container(
                       width: 2,
                       height: 30,
-                      color: Colors.white.withOpacity(0.6),
+                      color: AppConstants.backgroundColor.withOpacity(0.6),
                     ),
                     Expanded(
                       child: InkWell(
                         onTap: () {
-                          // TODO: Tambah Manual
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text(
+                              Text(
                                 'Tambah Manual',
-                                style: TextStyle(color: Colors.white),
+                                style: AppConstants.bodyStyle.copyWith(color: AppConstants.backgroundColor),
                               ),
                               const SizedBox(width: 8),
-                              const Icon(Icons.badge, color: Colors.white),
+                              Icon(Icons.badge, color: AppConstants.backgroundColor),
                             ],
                           ),
                         ),
@@ -207,7 +199,7 @@ class _GuestScreenState extends State<GuestScreen> {
         horizontal: AppConstants.defaultPadding,
         vertical: 6,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.cardRadius)),
       elevation: 1,
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -217,8 +209,8 @@ class _GuestScreenState extends State<GuestScreen> {
               backgroundColor: AppConstants.primaryColor,
               child: Text(
                 '$number',
-                style: const TextStyle(
-                  color: Colors.white,
+                style: AppConstants.bodyStyle.copyWith(
+                  color: AppConstants.backgroundColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -230,14 +222,17 @@ class _GuestScreenState extends State<GuestScreen> {
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(fontWeight: FontWeight.w600),
+                    style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.w600),
                   ),
-                  Text(location, style: const TextStyle(color: Colors.grey)),
+                  Text(
+                    location,
+                    style: AppConstants.bodyStyle.copyWith(color: AppConstants.neutralColor),
+                  ),
                 ],
               ),
             ),
             if (hasCheckmark)
-              const Icon(
+              Icon(
                 Icons.check,
                 color: AppConstants.primaryColor,
                 size: 24,
@@ -248,7 +243,7 @@ class _GuestScreenState extends State<GuestScreen> {
                 onPressed: () {},
               ),
             IconButton(
-              icon: const Icon(Icons.delete, color: Colors.red),
+              icon: Icon(Icons.delete, color: AppConstants.warningColor),
               onPressed: () {},
             ),
           ],

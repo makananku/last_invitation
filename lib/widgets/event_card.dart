@@ -22,10 +22,7 @@ class EventCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppConstants.cardRadius),
-        side: BorderSide(
-          color: AppConstants.primaryColor, // Thin green border
-          width: 1.0,
-        ),
+        side: BorderSide(color: AppConstants.primaryColor, width: 1.0),
       ),
       elevation: 4,
       child: Padding(
@@ -34,11 +31,11 @@ class EventCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildUserInfo(),
-            const Divider(
-              color: Colors.green,
+            Divider(
+              color: AppConstants.primaryColor,
               thickness: 1.0,
-              indent: 30, // Increased margin from the left edge
-              endIndent: 30, // Increased margin from the right edge
+              indent: 30,
+              endIndent: 30,
             ),
             const SizedBox(height: AppConstants.defaultPadding),
             _buildEventInfo(),
@@ -56,8 +53,8 @@ class EventCard extends StatelessWidget {
           backgroundColor: AppConstants.primaryColor,
           child: Text(
             username.isNotEmpty ? username[0].toUpperCase() : '?',
-            style: const TextStyle(
-              color: Colors.white,
+            style: AppConstants.bodyStyle.copyWith(
+              color: AppConstants.backgroundColor,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -66,10 +63,7 @@ class EventCard extends StatelessWidget {
         const SizedBox(width: 12),
         Text(
           username,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -79,28 +73,22 @@ class EventCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Nama Event',
-          style: TextStyle(color: Colors.grey),
+          style: AppConstants.bodyStyle.copyWith(color: AppConstants.neutralColor),
         ),
         Text(
           eventName,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 8),
-        const Text(
+        Text(
           'Waktu Event',
-          style: TextStyle(color: Colors.grey),
+          style: AppConstants.bodyStyle.copyWith(color: AppConstants.neutralColor),
         ),
         Text(
           '${eventDate.day} ${_getMonthName(eventDate.month)} ${eventDate.year}',
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
+          style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -108,8 +96,18 @@ class EventCard extends StatelessWidget {
 
   String _getMonthName(int month) {
     const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+      'Januari',
+      'Februari',
+      'Maret',
+      'April',
+      'Mei',
+      'Juni',
+      'Juli',
+      'Agustus',
+      'September',
+      'Oktober',
+      'November',
+      'Desember'
     ];
     return months[month - 1];
   }

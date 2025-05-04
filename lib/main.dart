@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'screen/login_screen.dart';
+import 'constants/app_constants.dart';
 import 'screen/dashboard_screen.dart';
 import 'screen/guest_screen.dart';
+import 'screen/login_screen.dart';
 import 'screen/rsvp_screen.dart';
+import 'screen/setting_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lastinvitation',
+      title: AppConstants.appName,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppConstants.secondaryColor),
         useMaterial3: true,
       ),
       initialRoute: '/login',
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/dashboard': (context) => const DashboardScreen(),
         '/guest': (context) => const GuestScreen(),
         '/rsvp': (context) => const RSVPScreen(),
+        '/settings': (context) => const SettingScreen(),
       },
     );
   }

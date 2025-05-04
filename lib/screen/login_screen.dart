@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/app_constants.dart';
 import 'dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,15 +24,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppConstants.backgroundColor,
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            padding: const EdgeInsets.symmetric(horizontal: AppConstants.defaultPadding * 2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo dan Nama Aplikasi
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -42,54 +42,46 @@ class _LoginScreenState extends State<LoginScreen> {
                       fit: BoxFit.cover,
                     ),
                     const SizedBox(width: 8),
-                    const Text(
-                      'Lastinvitation',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                    Text(
+                      AppConstants.appName,
+                      style: AppConstants.titleStyle.copyWith(
+                        color: AppConstants.secondaryColor,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 48),
-
-                // Field Username/E-Mail
+                const SizedBox(height: AppConstants.defaultPadding * 3),
                 TextField(
                   controller: _emailController,
                   decoration: InputDecoration(
                     labelText: 'Username/E-Mail',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppConstants.borderRadius),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
+                      horizontal: AppConstants.defaultPadding,
                       vertical: 12,
                     ),
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
-                const SizedBox(height: 16),
-
-                // Field Password
+                const SizedBox(height: AppConstants.defaultPadding),
                 TextField(
                   controller: _passwordController,
                   obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(AppConstants.borderRadius),
                     ),
                     contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
+                      horizontal: AppConstants.defaultPadding,
                       vertical: 12,
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                        color: Colors.grey,
+                        _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                        color: AppConstants.neutralColor,
                       ),
                       onPressed: () {
                         setState(() {
@@ -99,18 +91,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
-
-                // Tombol Login
+                const SizedBox(height: AppConstants.defaultPadding * 1.5),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Logika untuk login (opsional: validasi atau autentikasi)
                       print('Email: ${_emailController.text}');
                       print('Password: ${_passwordController.text}');
-
-                      // Navigasi ke DashboardScreen
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -119,19 +106,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      backgroundColor: AppConstants.primaryColor,
+                      padding: const EdgeInsets.symmetric(vertical: AppConstants.defaultPadding),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(AppConstants.borderRadius),
                       ),
                     ),
-                    child: const Text(
+                    child: Text(
                       'Login',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      style: AppConstants.buttonStyle,
                     ),
                   ),
                 ),

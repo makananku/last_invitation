@@ -18,7 +18,6 @@ class _RSVPScreenState extends State<RSVPScreen> {
       canPop: false,
       onPopInvokedWithResult: (didPop, _) async {
         if (didPop) return;
-        // Navigate to DashboardScreen instead of popping
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -80,9 +79,9 @@ class _RSVPScreenState extends State<RSVPScreen> {
           children: [
             Text(
               count,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
             ),
-            Text(label),
+            Text(label, style: AppConstants.bodyStyle),
           ],
         ),
       ),
@@ -102,7 +101,7 @@ class _RSVPScreenState extends State<RSVPScreen> {
         statusColor = Colors.red;
         break;
       default:
-        statusColor = Colors.grey;
+        statusColor = AppConstants.neutralColor;
     }
 
     return Card(
@@ -110,7 +109,7 @@ class _RSVPScreenState extends State<RSVPScreen> {
         horizontal: AppConstants.defaultPadding,
         vertical: 6,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppConstants.cardRadius)),
       elevation: 1,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
@@ -120,7 +119,7 @@ class _RSVPScreenState extends State<RSVPScreen> {
               backgroundColor: AppConstants.primaryColor,
               child: Text(
                 initial,
-                style: const TextStyle(color: Colors.white),
+                style: AppConstants.bodyStyle.copyWith(color: AppConstants.backgroundColor),
               ),
             ),
             const SizedBox(width: 12),
@@ -128,9 +127,15 @@ class _RSVPScreenState extends State<RSVPScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(
+                    name,
+                    style: AppConstants.bodyStyle.copyWith(fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(height: 4),
-                  Text(message, style: const TextStyle(color: Colors.grey)),
+                  Text(
+                    message,
+                    style: AppConstants.bodyStyle.copyWith(color: AppConstants.neutralColor),
+                  ),
                 ],
               ),
             ),
@@ -143,7 +148,7 @@ class _RSVPScreenState extends State<RSVPScreen> {
               ),
               child: Text(
                 status,
-                style: TextStyle(
+                style: AppConstants.bodyStyle.copyWith(
                   color: statusColor,
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
